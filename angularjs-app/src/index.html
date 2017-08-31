@@ -1,0 +1,52 @@
+<!DOCTYPE html >
+<html lang="en"
+      ng-app="legacy">
+<head>
+  <title>AngularJS Legacy App</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap.css"
+        rel="stylesheet"
+        type="text/css">
+  <link href="./assets/style.css"
+        rel="stylesheet"
+        type="text/css">
+</head>
+
+<body>
+
+
+<div class="navbar">
+  <div class="navbar-inner">
+    <a class="brand"
+       href="#!/">Bootstrap 2.3.2 / AngularJS 1.6
+    </a>
+    <ul class="nav">
+      <li>
+        <a href="#!/angular">🦄&nbsp;&nbsp;Angular</a>
+      </li>
+      <li class="active">
+        <a href="#!/angularjs">🐴&nbsp;&nbsp;AngularJS</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="container main-content">
+  <div ui-view>
+  </div>
+
+</div>
+
+<!-- Angular -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-resource.min.js"></script>
+
+<!-- 3rd Party Libs -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
+
+<!-- App -->
+<script src="app/app.main.js"></script>
+<script src="app/app.routes.js"></script>
+<script src="app/counter.controller.js"></script>
+
+</body>
+</html>

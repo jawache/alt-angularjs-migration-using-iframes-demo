@@ -1,0 +1,17 @@
+<div class="row text-center">
+  <div class="col">
+    <div id="counter"
+         (click)="increment()">
+      <h1 class="noselect">{{ counter }}</h1>
+    </div>
+
+    <p>Click above to increment the counter, the same number is shared between Angular and AngularJS</p>
+
+    <button id="reset"
+            class="btn btn-light btn-lg"
+            type="button"
+            (click)="reset()">Reset
+    </button>
+  </div>
+
+</div>
