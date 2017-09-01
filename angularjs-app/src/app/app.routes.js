@@ -10,22 +10,12 @@
             });
 
         $urlRouterProvider.otherwise(function ($injector, $location) {
+          // If this app can't handle the route, let the parent iframe, the host Angular app, try and handle it.
           var path = $location.path();
           console.log("The AngularJS app recieved a path it couldn't resolve, posting to parent iframe see if it can handle the path " + path);
-          // Parent is always the parent iframe
+          // parent is always the parent iframe, we can use the postMessage API to post the URL to the parent iframe here.
+          // NOTE: Passing in * is a security vulnerability, need to think about and address this in a real production application.
           parent.postMessage({navigateTo: path}, "*");
         });
       });
 })();
-
-/*
-TODO:
-
-- Create Angular app with counter and dog page
-- When you click counter it falls back to otherwise route and loads IframeComponent
-- When you click dog from ng takes you to dog
-- When you click dog from ng1 takes you to dog in Angular by posting iframe
-https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
-https://davidwalsh.name/window-iframe
-
- */

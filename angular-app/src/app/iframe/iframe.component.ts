@@ -2,11 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 
-// Create IE + others compatible event handler
-var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
-var eventer = window[eventMethod];
-var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
-
 
 @Component({
   selector: 'app-iframe',
@@ -22,24 +17,37 @@ export class IframeComponent implements OnInit {
     this.route.url.subscribe(urlSegments => {
       // Create a unique URL each time so the iframe will detect the change
       this.counter += 1;
-      const requestedUrl = 'http://localhost:8080/legacy/?counter=' + this.counter + '#!/' + urlSegments.join('');
+      const requestedUrl = '/legacy/?counter=' + this.counter + '#!/' + urlSegments.join('');
       console.log(requestedUrl);
+
+      // Angular by default sanitises a URL, we need to bypass that so the full URL is rendered
+      // NOTE: Need to look into security considerations of this
       this.url = this.sanitizer.bypassSecurityTrustResourceUrl(requestedUrl);
     });
 
+    this.listenForFallbackRoutingEvents();
+  }
 
-// Listen to message from child window
-    eventer(messageEvent,  (e) => {
+
+  /*
+   If the iframed-in app can't resolve a URL itself it will post a message to the parent
+   iframe (this app). Listen to those messages and attempt to navigate to that URL.
+   */
+  listenForFallbackRoutingEvents() {
+    // Create IE + others compatible event handler
+    const eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+    const eventer = window[eventMethod];
+    const messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+
+
+    eventer(messageEvent, (e) => {
       if (e.data.navigateTo) {
         console.log('parent received message!:  ', e.data);
         let url = e.data.navigateTo;
         console.log(url);
         this.router.navigateByUrl(url);
-
-
       }
     }, false);
-
   }
 
   ngOnInit() {

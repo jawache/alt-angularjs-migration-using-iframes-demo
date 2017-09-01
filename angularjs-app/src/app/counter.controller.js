@@ -1,7 +1,7 @@
 (function () {
   angular
       .module('legacy')
-      .controller('CounterCtrl', function ($scope, $state) {
+      .controller('CounterCtrl', function ($scope) {
         $scope.counter = parseInt(localStorage.getItem("counter")) || 0;
 
         $scope.increment = function () {
