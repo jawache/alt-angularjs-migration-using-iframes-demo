@@ -1,34 +1,35 @@
-/* tslint:disable:no-unused-variable */
-
 import { TestBed, async } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
-  beforeEach(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule
+      ],
       declarations: [
         AppComponent
       ],
-    });
-    TestBed.compileComponents();
-  });
+    }).compileComponents();
+  }));
 
-  it('should create the app', async(() => {
+  it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  }));
+  });
 
-  it(`should have as title 'app works!'`, async(() => {
+  it(`should have as title 'my-dream-app'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('app works!');
-  }));
+    expect(app.title).toEqual('my-dream-app');
+  });
 
-  it('should render title in a h1 tag', async(() => {
+  it('should render title in a h1 tag', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('app works!');
-  }));
+    expect(compiled.querySelector('h1').textContent).toContain('Welcome to my-dream-app!');
+  });
 });
