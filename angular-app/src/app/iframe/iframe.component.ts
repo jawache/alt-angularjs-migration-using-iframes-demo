@@ -6,12 +6,11 @@ import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 @Component({
   selector: 'app-iframe',
   templateUrl: './iframe.component.html',
-  styleUrls: ['./iframe.component.css']
+  styleUrls: ['./iframe.component.scss']
 })
 export class IframeComponent implements OnInit {
   public url: SafeResourceUrl;
   private counter = 0;
-
 
   constructor(private route: ActivatedRoute, private sanitizer: DomSanitizer, private router: Router) {
     this.route.url.subscribe(urlSegments => {
@@ -24,12 +23,10 @@ export class IframeComponent implements OnInit {
       // NOTE: Need to look into security considerations of this
       this.url = this.sanitizer.bypassSecurityTrustResourceUrl(requestedUrl);
     });
-
     this.listenForFallbackRoutingEvents();
   }
 
-
-  /*
+    /*
    If the iframed-in app can't resolve a URL itself it will post a message to the parent
    iframe (this app). Listen to those messages and attempt to navigate to that URL.
    */
@@ -51,5 +48,7 @@ export class IframeComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
+
 }

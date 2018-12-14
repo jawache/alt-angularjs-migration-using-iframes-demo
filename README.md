@@ -56,4 +56,3 @@ This launches a web-server running on http://localhost:8080
 The `/` path serves the angular application.
 The `/legacy` path serves the angularjs application.
 
-
